@@ -11,14 +11,14 @@ import { ServicesModule } from './services/services.module';
 @NgModule({
   declarations: [
     AppComponent,
-    AuthModule,
-    DashboardModule,
-    ServicesModule
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AuthModule,
+    DashboardModule,
+    ServicesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
