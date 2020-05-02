@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Router, RouterOutlet, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ng-fire-auth';
+    public title = 'ng-fire-auth';
+    public isLoggedIn = false;
+
+    constructor(public router: Router) {
+
+    }
+
 }

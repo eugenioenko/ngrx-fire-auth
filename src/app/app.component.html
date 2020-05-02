@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+
+<div class="main-container" *ngIf="isLoggedIn">
+    <div class="alert alert-app-level">
+        alert
+    </div>
+    <header class="header header-6">
+        header
+    </header>
+    <div class="content-container">
+        <div class="content-area">
+            <ng-container *ngTemplateOutlet="routerOutlet"></ng-container>
+        </div>
+        <nav class="sidenav">
+            sidenav
+        </nav>
+    </div>
+</div>
+<div class="main-container" *ngIf="!isLoggedIn">
+    <ng-container *ngTemplateOutlet="routerOutlet"></ng-container>
+</div>
+
+<ng-template #routerOutlet>
+    <router-outlet></router-outlet>
+</ng-template>
