@@ -4,14 +4,15 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { NotFoundComponent } from './dashboard/not-found/not-found.component';
+import { AuthGuard } from './services/auth.guard';
 
 
 const routes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
-    { path: '', component: DashboardComponent },
-    { path: '**', component: NotFoundComponent }
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: '**', component: NotFoundComponent, pathMatch: 'full' }
 
 ];
 
