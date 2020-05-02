@@ -9,6 +9,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ServicesModule } from './services/services.module';
 import { ClarityModule } from '@clr/angular';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from './store/reducers/app.reducer';
+import { AuthEffects } from './store/effects/auth.effects';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { RouterModule } from '@angular/router';
     DashboardModule,
     ServicesModule,
     ClarityModule,
-    RouterModule
+    RouterModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
