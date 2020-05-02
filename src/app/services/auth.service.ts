@@ -8,7 +8,7 @@ import { IAuthLoginRequest } from '../models/auth-login.request';
     providedIn: 'root'
 })
 export class AuthService {
-
+    private logged = false;
     constructor() { }
 
     public signup(request: IAuthSignupRequest): Observable<IUser> {
@@ -16,11 +16,20 @@ export class AuthService {
     }
 
     public login(request: IAuthLoginRequest): Observable<IUser> {
+        this.logged = false;
         return of(null);
+        return of({
+            id: 'asdf',
+            email: request.email
+        });
     }
 
     public logout(): Observable<IUser> {
         return of(null);
+    }
+
+    public isLoggedIn(): Observable<boolean> {
+        return of(this.logged)
     }
 
 }

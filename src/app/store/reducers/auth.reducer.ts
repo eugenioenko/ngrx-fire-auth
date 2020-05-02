@@ -7,11 +7,22 @@ export const authReducers = (
 ): IAuthState => {
     switch (action.type) {
         case EAuthActions.LoginSuccess:
+            return {
+                ...state,
+                user: action.payload,
+                error: null
+            }
             break;
         case EAuthActions.LoginError:
-            break;
+            return {
+                ...state,
+                user: null,
+                error: 'Invalid email password combination or user is not registred'
+            }
+        case EAuthActions.LoginRequest:
+             break;
         case EAuthActions.Logout:
-            break;
+            return initialAuthSate
         default:
             return state;
     }

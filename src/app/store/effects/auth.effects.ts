@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { AuthService } from 'src/app/services/auth.service';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable, of} from 'rxjs';
-import {switchMap, map } from 'rxjs/operators';
+import {switchMap, map, tap } from 'rxjs/operators';
 import { EAuthActions, AuthLoginRequestAction, AuthLoginSuccessAction, AuthLoginErrorAction } from '../actions/auth.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
@@ -14,16 +15,18 @@ export class AuthEffects {
         switchMap(request => this.authService.login(request)),
         map(response => {
             if (response) {
-                return new AuthLoginSuccessAction({});
+                this.router.navigate(['/dashboard']);
+                return new AuthLoginSuccessAction(response);
             } else {
-                return new AuthLoginErrorAction({});
+                return new AuthLoginErrorAction(response);
             }
         })
     );
 
     constructor(
         private authService: AuthService,
-        private actions: Actions
+        private actions: Actions,
+        private router: Router
     ) { }
 
 }
