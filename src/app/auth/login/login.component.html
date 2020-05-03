@@ -1,4 +1,4 @@
-<div class="login-wrapper">
+<div class="login-wrapper" *ngIf="(auth$ | async)?.ready">
     <form class="login" (submit)="login()">
         <section class="title">
             <h3 class="welcome">Welcome to</h3>
@@ -18,8 +18,8 @@
                 <label>Remember me</label>
                 <input type="checkbox" name="rememberMe" clrCheckbox />
             </clr-checkbox-wrapper>
-            <div class="error active" *ngIf="(auth$ | async).error">
-                {{ (auth$ | async).error }}
+            <div class="error active" *ngIf="(auth$ | async)?.error">
+                {{ (auth$ | async)?.error }}
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
             <a [routerLink]="['/signup']" class="signup">Don't have an account? Register here, its free</a>

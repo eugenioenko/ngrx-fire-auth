@@ -4,6 +4,7 @@ import { Store, createFeatureSelector } from '@ngrx/store';
 import { AuthLoginRequestAction } from 'src/app/store/actions/auth.actions';
 import { IAuthState } from 'src/app/store/state/auth.state';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
     public auth$: Observable<IAuthState>;
-    public form = {email: 'test@test.com', password: '123456'};
+    public form = {email: 'enkoreaver@gmail.com', password: 'minino333'};
 
     constructor(
         private store: Store<IAppState>
@@ -20,7 +21,6 @@ export class LoginComponent implements OnInit {
 
     public ngOnInit(): void {
         this.auth$ = this.store.select(createFeatureSelector<IAuthState>('auth'));
-
     }
 
     public login(): void {

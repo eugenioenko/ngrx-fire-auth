@@ -13,6 +13,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './store/reducers/app.reducer';
 import { AuthEffects } from './store/effects/auth.effects';
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { firebaseConfig } from 'keys/firebaseConfig';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { AuthEffects } from './store/effects/auth.effects';
     ClarityModule,
     RouterModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
