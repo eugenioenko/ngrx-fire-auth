@@ -17,15 +17,13 @@ export const authReducers = (
             return {
                 ...state,
                 user: null,
-                error: 'Invalid email password combination or user is not registred'
+                error: 'Invalid email/password combination or user with this email is not registred'
             }
         case EAuthActions.Initialized:
                 return {
                     ...state,
                     ready: true
                 }
-        case EAuthActions.LoginRequest:
-             break;
         case EAuthActions.LogoutRequest:
             console.log('logout request action');
             return initialAuthSate

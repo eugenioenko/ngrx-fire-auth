@@ -1,24 +1,41 @@
 
-<div class="main-container" *ngIf="isLoggedIn">
-    <div class="alert alert-app-level">
-        alert
-    </div>
-    <header class="header header-6">
-        header
-    </header>
-    <div class="content-container">
-        <div class="content-area">
-            <ng-container *ngTemplateOutlet="routerOutlet"></ng-container>
+<ng-container *ngIf="(auth$ | async)?.ready">
+    <div class="main-container" *ngIf="(auth$ | async)?.user">
+        <div class="alert alert-app-level" *ngIf="false">
+            alert
         </div>
-        <nav class="sidenav">
-            sidenav
-        </nav>
+        <header class="header" [clr-nav-level]="1">
+            <div class="branding">
+                <a href="..." class="nav-link">
+                    <clr-icon shape="target"></clr-icon>
+                    <span class="title">ng-fire-auth</span>
+                </a>
+            </div>
+            <div class="header-actions">
+                <clr-dropdown>
+                    <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+                        {{ (auth$ | async)?.user?.email }}
+                        <clr-icon shape="caret down"></clr-icon>
+                    </button>
+                    <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                        <a clrDropdownItem (click)="logout()">Log out</a>
+                    </clr-dropdown-menu>
+                </clr-dropdown>
+            </div>
+        </header>
+        <div class="content-container">
+            <nav class="sidenav" [clr-nav-level]="2">
+                <app-sidenav></app-sidenav>
+            </nav>
+            <div class="content-area">
+                <ng-container *ngTemplateOutlet="routerOutlet"></ng-container>
+            </div>
+        </div>
     </div>
-</div>
-<div class="main-container" *ngIf="!isLoggedIn">
-    <ng-container *ngTemplateOutlet="routerOutlet"></ng-container>
-</div>
-
+    <div class="main-container" *ngIf="!(auth$ | async)?.user">
+        <ng-container *ngTemplateOutlet="routerOutlet"></ng-container>
+    </div>
+</ng-container>
 <ng-template #routerOutlet>
     <router-outlet></router-outlet>
 </ng-template>

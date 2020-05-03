@@ -34,6 +34,7 @@ export class AuthService {
             email: user.email
         };
     }
+
     public signup(request: IAuthSignupRequest): Observable<IUser> {
         const signUp = this.fireAuth
             .createUserWithEmailAndPassword(request.email, request.password);

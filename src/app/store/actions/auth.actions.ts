@@ -30,7 +30,7 @@ export class AuthLoginSuccessAction implements Action {
 
 export class AuthLoginErrorAction implements Action {
     public readonly type = EAuthActions.LoginError;
-    constructor(public payload: any){ }
+    constructor(public payload: void){ }
 }
 
 export class AuthLogoutRequestAction implements Action {

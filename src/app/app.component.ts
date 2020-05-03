@@ -1,5 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router, RouterOutlet, ActivatedRoute } from '@angular/router';
+import { Store, createFeatureSelector } from '@ngrx/store';
+import { IAppState } from './store/state/app.state';
+import { IAuthState } from './store/state/auth.state';
+import { Observable } from 'rxjs';
+import { AuthLogoutRequestAction } from './store/actions/auth.actions';
 
 @Component({
     selector: 'app-root',
@@ -9,9 +14,11 @@ import { Router, RouterOutlet, ActivatedRoute } from '@angular/router';
 export class AppComponent {
     public title = 'ng-fire-auth';
     public isLoggedIn = false;
+    public auth$: Observable<IAuthState>;
 
-    constructor(public router: Router) {
-
+    constructor(
+        private store: Store<IAppState>
+    ) {
+        this.auth$ = this.store.select(createFeatureSelector<IAuthState>('auth'));
     }
-
 }
