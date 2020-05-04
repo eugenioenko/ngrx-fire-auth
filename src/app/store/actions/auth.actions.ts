@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { IAuthLoginRequest } from 'src/app/models/auth-login.request';
 import { IUser } from 'src/app/models/user';
+import { IAuthSignupRequest } from 'src/app/models/auth-signup.request';
 
 export enum EAuthActions {
     Initialized = '[Auth] Initialized',
@@ -9,7 +10,9 @@ export enum EAuthActions {
     LoginError = '[Auth] LoginError',
     LogoutRequest = '[Auth] LogoutRequest',
     LogoutSuccess = '[Auth] LogoutSuccess',
-    Signup = '[Auth] Signup'
+    SignupRequest = '[Auth] SignupRequest',
+    SignupSuccess = '[Auth] SignupSuccess',
+    SignupError = '[Auth] SignupError'
 }
 
 export class AuthInitializedAction implements Action {
@@ -43,11 +46,22 @@ export class AuthLogoutSuccessAction implements Action {
     constructor(public payload: void){ }
 }
 
-export class AuthSignupAction implements Action {
-    public readonly type = EAuthActions.Signup;
+export class AuthSignupRequestAction implements Action {
+    public readonly type = EAuthActions.SignupRequest;
+    constructor(public payload: IAuthSignupRequest){ }
+}
+
+export class AuthSignupSuccessAction implements Action {
+    public readonly type = EAuthActions.SignupSuccess;
     constructor(public payload: IUser){ }
+}
+
+export class AuthSignupErrorAction implements Action {
+    public readonly type = EAuthActions.SignupError;
+    constructor(public payload: void){ }
 }
 
 export type AuthActions = AuthLoginRequestAction | AuthLoginSuccessAction |
     AuthLoginErrorAction | AuthLogoutRequestAction | AuthLogoutSuccessAction |
-    AuthSignupAction | AuthInitializedAction;
+    AuthSignupRequestAction | AuthSignupSuccessAction | AuthSignupErrorAction |
+    AuthInitializedAction;

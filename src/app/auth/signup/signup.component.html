@@ -1,5 +1,5 @@
 <div class="login-wrapper">
-    <form class="login">
+    <form class="login" (submit)="signup()">
         <section class="title">
             <h3 class="welcome">Registration</h3>
             NgFireAuth
@@ -7,8 +7,8 @@
         </section>
         <div class="login-group">
             <clr-input-container>
-                <label class="clr-sr-only">Username</label>
-                <input type="text" name="username" clrInput placeholder="Username" [(ngModel)]="form.username"/>
+                <label class="clr-sr-only">Email</label>
+                <input type="text" name="email" clrInput placeholder="Email" [(ngModel)]="form.email"/>
             </clr-input-container>
             <clr-password-container>
                 <label class="clr-sr-only">Password</label>
@@ -18,7 +18,10 @@
                 <label class="clr-sr-only">Confirm Password</label>
                 <input type="password" name="confirmPassword" clrPassword placeholder="Confirm Password" [(ngModel)]="form.confirmPassword"/>
             </clr-password-container>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="error active" *ngIf="(auth$ | async)?.error">
+                {{ (auth$ | async)?.error }}
+            </div>
+            <button type="submit" class="btn">Register</button>
             <a class="signup" [routerLink]="['/login']">Already have an account? Login in here</a>
         </div>
     </form>

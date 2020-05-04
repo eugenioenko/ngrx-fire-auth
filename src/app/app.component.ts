@@ -21,4 +21,8 @@ export class AppComponent {
     ) {
         this.auth$ = this.store.select(createFeatureSelector<IAuthState>('auth'));
     }
+
+    public logout(): void {
+        this.store.dispatch(new AuthLogoutRequestAction());
+    }
 }

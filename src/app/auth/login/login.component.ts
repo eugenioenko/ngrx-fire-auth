@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
     public auth$: Observable<IAuthState>;
-    public form = {email: 'enkoreaver@gmail.comq', password: 'minino333'};
+    public form = {email: '', password: ''};
 
     constructor(
         private store: Store<IAppState>
