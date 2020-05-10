@@ -21,14 +21,12 @@ export class AlertGlobalComponent {
     }
 
     public onClose(index: number, alert: IAlertMessage): void {
-        alert.subject.next(0);
-        alert.subject.complete();
+        alert.callback(0);
         this.store.dispatch(new AlertGlobalRemoveAction(index));
     }
 
     public onAction(index: number, alert: IAlertMessage): void {
-        alert.subject.next(1);
-        // alert.subject.complete();
+        alert.callback(1);
         this.store.dispatch(new AlertGlobalRemoveAction(index));
     }
 

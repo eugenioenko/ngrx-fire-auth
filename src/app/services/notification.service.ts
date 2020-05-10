@@ -15,12 +15,12 @@ export class NotificationService {
         private store: Store<IAppState>
     ) { }
 
-    public global(message: string, type: EAlertType, action?: string): Subject<number> {
+    public global(message: string, type: EAlertType, action?: string, callback?: (number) => void): Subject<number> {
         const confirmation = new Subject<number>();
         const alert: IAlertMessage = {
             type: EAlertType[type].toLowerCase(),
             text: message,
-            subject: confirmation,
+            callback: callback,
             action: action
 
         }
@@ -32,7 +32,7 @@ export class NotificationService {
         const alert: IAlertMessage = {
             type: EAlertType[type].toLowerCase(),
             text: message,
-            subject: null,
+            callback: null,
             action: null
         }
         this.store.dispatch(new AlertToastAddAction(alert));
