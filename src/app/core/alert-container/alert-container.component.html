@@ -1,0 +1,8 @@
+<div class="alert-inner-container">
+    <app-alert-message
+        *ngFor="let toast of (alert$ | async).toasts; index as index"
+        [text]="toast.text"
+        [type]="toast.type"
+        [index]="index"
+    ></app-alert-message>
+</div>

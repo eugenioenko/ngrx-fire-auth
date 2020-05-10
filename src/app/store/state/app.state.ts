@@ -1,12 +1,15 @@
 import { RouterReducerState } from '@ngrx/router-store'
 import { IAuthState, initialAuthSate } from './auth.state';
+import { IAlertState, initialAlertState } from './alert.state';
 
 export interface IAppState {
-    auth: IAuthState
+    auth: IAuthState,
+    alert: IAlertState
 }
 
 export function getInitialAppState(): IAppState {
     return {
-        auth: initialAuthSate
+        auth: initialAuthSate,
+        alert: initialAlertState
     };
 }

@@ -16,6 +16,7 @@ import { AuthEffects } from './store/effects/auth.effects';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { firebaseConfig } from 'keys/firebaseConfig';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { firebaseConfig } from 'keys/firebaseConfig';
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([AuthEffects]),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
