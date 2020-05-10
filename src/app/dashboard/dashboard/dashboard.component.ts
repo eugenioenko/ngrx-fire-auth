@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
 
     public toast(): void {
         this.notificationService
-            .global('text', EAlertType.Warning, 'fix the problem', res => {
+            .global('text', EAlertType.Warning, 'fix the problem').subscribe(res => {
                 console.log(res);
             });
 

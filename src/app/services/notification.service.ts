@@ -15,17 +15,20 @@ export class NotificationService {
         private store: Store<IAppState>
     ) { }
 
-    public global(message: string, type: EAlertType, action?: string, callback?: (number) => void): Subject<number> {
-        const confirmation = new Subject<number>();
-        const alert: IAlertMessage = {
-            type: EAlertType[type].toLowerCase(),
-            text: message,
-            callback: callback,
-            action: action
+    public global(message: string, type: EAlertType, action?: string): Observable<number> {
+       return new Observable(subscriber => {
+            const alert: IAlertMessage = {
+                type: EAlertType[type].toLowerCase(),
+                text: message,
+                callback: (res) => {
+                    subscriber.next(res),
+                    subscriber.complete();
+                },
+                action: action
 
-        }
-        this.store.dispatch(new AlertGlobalAddAction(alert));
-        return confirmation;
+            }
+            this.store.dispatch(new AlertGlobalAddAction(alert));
+       });
     }
 
     public toast(message: string, type: EAlertType): void {
