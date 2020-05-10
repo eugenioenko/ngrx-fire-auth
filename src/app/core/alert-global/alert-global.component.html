@@ -1,0 +1,16 @@
+<clr-alerts *ngIf="(alert$ | async)?.global?.length">
+    <clr-alert
+        *ngFor="let alert of (alert$ | async).global; index as index"
+        [clrAlertType]="alert.type"
+        [clrAlertAppLevel]="true"
+        (clrAlertClosedChange)="onClose(index, alert)"
+    >
+        <clr-alert-item>
+            <span class="alert-text">{{ alert.text }}</span>
+            <div class="alert-actions" *ngIf="alert.action">
+                <button class="btn alert-action" (click)="onAction(index, alert)">{{ alert.action }}</button>
+            </div>
+        </clr-alert-item>
+    </clr-alert>
+
+</clr-alerts>

@@ -1,6 +1,8 @@
-import { EAlertType } from './alert-type.enum';
+import { Subject } from 'rxjs';
 
 export interface IAlertMessage {
     type: string,
     text: string;
+    action: string;
+    subject: Subject<number>;
 }

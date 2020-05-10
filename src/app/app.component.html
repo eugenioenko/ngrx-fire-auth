@@ -1,16 +1,7 @@
 
 <ng-container *ngIf="(auth$ | async)?.ready">
     <div class="main-container" *ngIf="(auth$ | async)?.user">
-        <clr-alerts *ngIf="(alert$ | async)?.global?.length">
-            <clr-alert *ngFor="let alert of (alert$ | async).global" [clrAlertType]="alert.type" [clrAlertAppLevel]="true">
-                <clr-alert-item>
-                    <span class="alert-text">{{ alert.text }}</span>
-                    <div class="alert-actions">
-                        <button class="btn alert-action">Fix</button>
-                    </div>
-                </clr-alert-item>
-            </clr-alert>
-        </clr-alerts>
+        <app-alert-global></app-alert-global>
         <header class="header" [clr-nav-level]="1">
             <div class="branding">
                 <a href="..." class="nav-link">

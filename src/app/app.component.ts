@@ -22,7 +22,7 @@ export class AppComponent {
         private store: Store<IAppState>
     ) {
         this.auth$ = this.store.select(createFeatureSelector<IAuthState>('auth'));
-        this.alert$ = this.store.select(createFeatureSelector<IAlertState>('alert'));
+
     }
 
     public logout(): void {

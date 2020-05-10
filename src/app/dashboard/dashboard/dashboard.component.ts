@@ -26,11 +26,12 @@ export class DashboardComponent implements OnInit {
     }
 
     public toast(): void {
-        // this.store.dispatch(new AlertGlobalAddAction('test'));
-        this.notificationService.global('text', EAlertType.Warning);
-        this.notificationService.global('text', EAlertType.Danger);
-        this.notificationService.toast('text', EAlertType.Danger);
-        this.notificationService.toast('toast', EAlertType.Warning);
+        this.notificationService
+            .global('text', EAlertType.Warning, 'fix the problem')
+            .subscribe(res => {
+                'subscribed'
+                console.log(res);
+            });
         this.notificationService.toast('text', EAlertType.Danger);
     }
 
