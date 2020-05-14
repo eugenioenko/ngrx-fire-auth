@@ -17,7 +17,6 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { firebaseConfig } from 'keys/firebaseConfig';
 import { CoreModule } from './core/core.module';
-import { ClientsModule } from './clients/clients.module';
 import { AuthService } from './services/auth.service';
 
 export function startupAuthServiceFactory(authService: AuthService): () => Promise<any> {
@@ -42,8 +41,7 @@ export function startupAuthServiceFactory(authService: AuthService): () => Promi
     EffectsModule.forRoot([AuthEffects]),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    CoreModule,
-    ClientsModule
+    CoreModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

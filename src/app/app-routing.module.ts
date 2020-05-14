@@ -5,10 +5,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { NotFoundComponent } from './dashboard/not-found/not-found.component';
 import { AuthGuard } from './services/auth.guard';
-import { ClientsListComponent } from './clients/clients-list/clients-list.component';
-import { ClientsAddComponent } from './clients/clients-add/clients-add.component';
-import { ClientsEditComponent } from './clients/clients-edit/clients-edit.component';
-
 
 const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -17,11 +13,7 @@ const routes: Routes = [
 
     {
         path: 'clients', canActivate: [AuthGuard],
-        children: [
-            { path: 'new', component: ClientsAddComponent },
-            { path: 'edit/:id', component: ClientsEditComponent },
-            { path: '', component: ClientsListComponent }
-        ]
+        loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule),
     },
 
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
