@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ClarityModule } from '@clr/angular';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -11,7 +12,8 @@ import { ClarityModule } from '@clr/angular';
   declarations: [DashboardComponent, NotFoundComponent, SidenavComponent],
   imports: [
     CommonModule,
-    ClarityModule
+    ClarityModule,
+    RouterModule
   ], exports: [
       SidenavComponent
   ]

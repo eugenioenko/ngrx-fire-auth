@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,13 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { firebaseConfig } from 'keys/firebaseConfig';
 import { CoreModule } from './core/core.module';
+import { ClientsModule } from './clients/clients.module';
+import { AuthService } from './services/auth.service';
+
+export function startupAuthServiceFactory(authService: AuthService): () => Promise<any> {
+    return () => authService.init();
+}
+
 
 @NgModule({
   declarations: [
@@ -35,9 +42,15 @@ import { CoreModule } from './core/core.module';
     EffectsModule.forRoot([AuthEffects]),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    CoreModule
+    CoreModule,
+    ClientsModule
   ],
-  providers: [],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: startupAuthServiceFactory,
+    deps: [AuthService],
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

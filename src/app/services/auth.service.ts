@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { IAuthSignupRequest } from '../models/auth-signup.request';
-import { Observable, of, from} from 'rxjs';
+import { Observable, of, from, pipe} from 'rxjs';
 import { IUser } from '../models/user';
 import { IAuthLoginRequest } from '../models/auth-login.request';
 import { AngularFireAuth } from  "@angular/fire/auth";
-import { map } from 'rxjs/operators';
+import { map, first, tap, delay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AuthLoginSuccessAction, AuthInitializedAction } from '../store/actions/auth.actions';
+import { AuthLoginSuccessAction, AuthInitializedAction, AuthLogoutRequestAction } from '../store/actions/auth.actions';
 
 @Injectable({
     providedIn: 'root'
@@ -18,14 +18,19 @@ export class AuthService {
         private fireAuth: AngularFireAuth,
         private router: Router,
         private store: Store
-    ) {
-        this.fireAuth.authState.subscribe(user => {
-            this.store.dispatch(new AuthInitializedAction());
-            if (user) {
-                this.router.navigate(['/dashboard']);
-                this.store.dispatch(new AuthLoginSuccessAction(this.userFromFireUser(user)))
-            }
-        });
+    ) { }
+
+    public init(): Promise<any> {
+        return this.fireAuth.authState
+            .pipe(
+                first(),
+                map(user => {
+                    this.store.dispatch(new AuthInitializedAction());
+                    if (user) {
+                        this.store.dispatch(new AuthLoginSuccessAction(this.userFromFireUser(user)))
+                    }
+                }))
+            .toPromise();
     }
 
     private userFromFireUser(user: firebase.User): IUser {

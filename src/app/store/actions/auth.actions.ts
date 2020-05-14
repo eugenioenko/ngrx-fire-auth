@@ -7,6 +7,7 @@ export enum EAuthActions {
     Initialized = '[Auth] Initialized',
     LoginRequest = '[Auth] LoginRequest',
     LoginSuccess = '[Auth] LoginSuccess',
+    LoginRelogin = '[Auth] LoginRelogin',
     LoginError = '[Auth] LoginError',
     LogoutRequest = '[Auth] LogoutRequest',
     LogoutSuccess = '[Auth] LogoutSuccess',
@@ -28,6 +29,11 @@ export class AuthLoginRequestAction implements Action {
 
 export class AuthLoginSuccessAction implements Action {
     public readonly type = EAuthActions.LoginSuccess;
+    constructor(public payload: IUser){ }
+}
+
+export class AuthLoginReloginAction implements Action {
+    public readonly type = EAuthActions.LoginRelogin;
     constructor(public payload: IUser){ }
 }
 
@@ -64,4 +70,4 @@ export class AuthSignupErrorAction implements Action {
 export type AuthActions = AuthLoginRequestAction | AuthLoginSuccessAction |
     AuthLoginErrorAction | AuthLogoutRequestAction | AuthLogoutSuccessAction |
     AuthSignupRequestAction | AuthSignupSuccessAction | AuthSignupErrorAction |
-    AuthInitializedAction;
+    AuthInitializedAction | AuthLoginReloginAction;
