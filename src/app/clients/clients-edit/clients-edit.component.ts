@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clients-edit',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./clients-edit.component.scss']
 })
 export class ClientsEditComponent implements OnInit {
-
-  constructor() { }
+  public id: string;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
   }
 
 }

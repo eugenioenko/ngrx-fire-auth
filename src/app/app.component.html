@@ -1,5 +1,5 @@
 
-<ng-container *ngIf="(auth$ | async)?.ready">
+<ng-container>
     <div class="main-container" *ngIf="(auth$ | async)?.user">
         <app-alert-global></app-alert-global>
         <header class="header" [clr-nav-level]="1">
