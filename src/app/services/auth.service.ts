@@ -29,8 +29,8 @@ export class AuthService {
                     if (user) {
                         this.store.dispatch(new AuthLoginSuccessAction(this.userFromFireUser(user)))
                     }
-                }))
-            .toPromise();
+                })
+            ).toPromise();
     }
 
     private userFromFireUser(user: firebase.User): IUser {

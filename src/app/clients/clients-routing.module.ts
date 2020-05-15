@@ -4,11 +4,11 @@ import { ClientsAddComponent } from './clients-add/clients-add.component';
 import { ClientsEditComponent } from './clients-edit/clients-edit.component';
 import { ClientsListComponent } from './clients-list/clients-list.component';
 
-
 const routes: Routes = [
     { path: 'new', component: ClientsAddComponent },
     { path: 'edit/:id', component: ClientsEditComponent },
-    { path: '', component: ClientsListComponent }
+    { path: 'list', component: ClientsListComponent },
+    { path: '', redirectTo: 'list' }
 ];
 
 @NgModule({
